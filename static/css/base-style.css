@@ -1,0 +1,27 @@
+.wrapper-main {
+	margin-top: 80px;
+	width: 1000px;
+}
+
+.wrapper-heading {
+	text-align: center;
+	font-size: 25px !important;
+	text-transform: capitalize;
+}
+
+.form-container {
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+
+/*Bootstrap customization*/
+
+.form-control {
+	box-shadow: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border-color: #7DC67D;
+}
