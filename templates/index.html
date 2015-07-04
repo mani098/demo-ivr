@@ -20,22 +20,55 @@
 					<form role="form" class="form-horizontal" method="POST">
 						{% csrf_token %}
 						<div class="form-group">
-							<label class="control-label col-sm-4">Welcome Message</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" autocomplete="off" 
-									placeholder="Welcome Message">
-						</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">Option 1</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" autocomplete="off" 
-									placeholder="Option 1">
+							<label class="control-label col-sm-2">Phone Number</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" autocomplete="off" value="+1 888-314-8506" disabled="true">
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-4 col-sm-8">
-								<button type="submit" class="btn btn-success" style="width:100%;">Update Customization</button>
+							<label class="control-label col-sm-2">Welcome Message</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" autocomplete="off" 
+									placeholder="Welcome Message" value="{{ ivr_phone.welcome_message }}" name="welcome_message-{{ ivr_phone.id }}">
+							</div>
+						</div>
+						{% for data in ivr_data %}				
+							<div class="form-group">
+								<label class="control-label col-sm-2">Option {{ forloop.counter }}</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" autocomplete="off" 
+										placeholder="Option {{ forloop.counter }}" value="{{ data.ivr_option }}" name="ivr_option-{{ data.id }}">
+								</div>
+								<div class="col-sm-2">
+									<select class="form-control" name='option_type-{{ data.id }}'>
+										{% if data.option_type == 'Redirect to' %}
+											<option selected="selected">Redirect to</option>
+											<option>Add Speak</option>
+										{% elif data.option_type == 'Add Speak' %}
+											<option>Redirect to</option>
+											<option selected="selected">Add Speak</option>
+										{% endif %}
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name='option_value-{{ data.id }}' autocomplete="off" value="{{ data.option_value }}">
+								</div>
+
+								<div class="col-sm-1 add-remove">
+										<!-- <span class='glyphicon glyphicon-plus-sign' aria-hidden="true"></span> -->
+										<span class='glyphicon glyphicon-remove-circle' aria-hidden="true"></span>
+								</div>
+							</div>
+						{% endfor %}
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-4">
+								<button type="submit" class="btn btn-success btn-width">Update Customization</button>
+							</div>
+							<div class="col-sm-2">
+								<button type="button" class="btn btn-success btn-width">
+									<span class='glyphicon glyphicon-plus' aria-hidden="true"></span>
+									Add Option
+								</button>
 							</div>
 						</div>
 					</form>

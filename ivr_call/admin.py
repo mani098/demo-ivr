@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from models import PhoneModel, IvrModel
+
+admin.site.register(PhoneModel)
+admin.site.register(IvrModel)

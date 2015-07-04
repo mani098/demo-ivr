@@ -10,11 +10,18 @@
 }
 
 .form-container {
-	margin-left: 200px;
+	/*margin-left: 100px;*/
+	/*margin-right: 100px;*/
+}
+
+.well-data {
+	margin-left: 150px;
 	margin-right: 200px;
 }
 
-
+.btn-width {
+	width: 100%;
+}
 /*Bootstrap customization*/
 
 .form-control {
@@ -24,4 +31,19 @@
 .form-control:focus {
 	box-shadow: none;
 	border-color: #7DC67D;
+}
+
+.add-remove {
+	padding: 5px 0px 0px 0px;
+	font-size: 20px;
+}
+
+.add-remove .glyphicon-plus-sign {
+	color: #7DC67D;
+	cursor: pointer;
+}
+
+.add-remove .glyphicon-remove-circle {
+	color: #D11919;
+	cursor: pointer;
 }
