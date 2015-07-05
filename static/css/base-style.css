@@ -38,12 +38,7 @@
 	font-size: 20px;
 }
 
-.add-remove .glyphicon-plus-sign {
-	color: #7DC67D;
-	cursor: pointer;
-}
-
 .add-remove .glyphicon-remove-circle {
-	color: #D11919;
+	color: #E68080;
 	cursor: pointer;
 }

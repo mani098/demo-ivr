@@ -1,5 +1,9 @@
 from models import IvrModel, PhoneModel
+import commands
 
+def get_ip_addr():
+	command_str = "ifconfig ppp0 | grep 'inet addr' |  cut -d: -f2 | awk '{print $1}'"
+	return "http://"+ str(commands.getoutput(command_str)) + ":5000"
 
 def update_ivr_data(post_data):
 	
@@ -24,14 +28,21 @@ def fetch_ivr_data(phone_number):
 	return ivrQueryset, phoneQueryset
 
 
-def get_ivr_message(phone_number):
+def get_ivr_data(phone_number):
 
-	phoneQueryset = PhoneModel.objects.filter(phone_number=phone_number).values('welcome_message')[0]
-
-	ivr_message = phoneQueryset
+	count = 1
+	ivr_options = {}
 	
-	ivrQueryset = IvrModel.objects.filter(phone__phone_number=phone_number).values('ivr_option')
+	phoneQueryset = PhoneModel.objects.filter(phone_number=phone_number).values('welcome_message')[0]
+	ivr_message = str(phoneQueryset['welcome_message'])
+	ivrQueryset = IvrModel.objects.filter(phone__phone_number=phone_number).values('ivr_option', 'option_type', 'option_value')
 
-	for key, values in ivrQueryset.iteritems():
-		pass
+	for option in ivrQueryset:
+		ivr_message += '. Press %d for %s' %(count, option['ivr_option'])
+		ivr_options[count] = dict(option_type = option['option_type'], option_value = option['option_value'])
+		count += 1
+
+	# print ivr_message
+	return ivr_message, ivr_options
+
 

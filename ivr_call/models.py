@@ -17,7 +17,7 @@ class IvrModel(models.Model):
 
 	ivr_option = models.CharField(max_length=30)
 	option_type = models.CharField(max_length=20, choices=ivr_choices, default='Redirect to')
-	option_value = models.CharField(max_length=40, null=True)
+	option_value = models.CharField(max_length=200, null=True)
 
 	def __unicode__(self):
 		return self.ivr_option

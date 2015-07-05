@@ -33,9 +33,9 @@
 							</div>
 						</div>
 						{% for data in ivr_data %}				
-							<div class="form-group">
+							<div class="form-group" id="form-row-{{ data.id }}">
 								<label class="control-label col-sm-2">Option {{ forloop.counter }}</label>
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<input type="text" class="form-control" autocomplete="off" 
 										placeholder="Option {{ forloop.counter }}" value="{{ data.ivr_option }}" name="ivr_option-{{ data.id }}">
 								</div>
@@ -50,18 +50,17 @@
 										{% endif %}
 									</select>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-4">
 									<input type="text" class="form-control" name='option_value-{{ data.id }}' autocomplete="off" value="{{ data.option_value }}">
 								</div>
 
 								<div class="col-sm-1 add-remove">
-										<!-- <span class='glyphicon glyphicon-plus-sign' aria-hidden="true"></span> -->
-										<span class='glyphicon glyphicon-remove-circle' aria-hidden="true"></span>
+									<span class='glyphicon glyphicon-remove-circle' aria-hidden="true"></span>
 								</div>
 							</div>
 						{% endfor %}
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-4">
+							<div class="col-sm-offset-2 col-sm-3">
 								<button type="submit" class="btn btn-success btn-width">Update Customization</button>
 							</div>
 							<div class="col-sm-2">
