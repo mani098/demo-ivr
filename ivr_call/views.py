@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import plivoxml
 
 from controllers import update_ivr_data, fetch_ivr_data, get_ivr_data, get_ip_addr
+from models import IvrModel
 
 # This file will be played when a caller presses 2.
 PLIVO_SONG = "https://s3.amazonaws.com/plivocloud/music.mp3"
@@ -71,3 +72,11 @@ def ivr_redirect(request):
 	response.add(getDigits)
 
 	return HttpResponse(str(response), content_type='text/xml')
+
+@csrf_exempt
+def option_delete(request):
+	if request.method == 'POST':
+		delete_id = request.POST.get('id')
+		IvrModel.objects.filter(id= delete_id).delete()
+		return HttpResponse("deleted")
+	return HttpResponse("Return table id in POST request")

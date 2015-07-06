@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/base-style.css"/>
 	<script src="/static/js/jquery-1.11.3.min.js"></script>
 	<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-	<!-- <script src="/static/js/base-action.js"></script> -->
 </head>
 <body>
 	<div class="container  wrapper-main">
@@ -33,7 +32,7 @@
 							</div>
 						</div>
 						{% for data in ivr_data %}				
-							<div class="form-group" id="form-row-{{ data.id }}">
+							<div class="form-group" id="form-row-{{ forloop.counter }}">
 								<label class="control-label col-sm-2">Option {{ forloop.counter }}</label>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" autocomplete="off" 
@@ -55,16 +54,16 @@
 								</div>
 
 								<div class="col-sm-1 add-remove">
-									<span class='glyphicon glyphicon-remove-circle' aria-hidden="true"></span>
+									<span class='glyphicon glyphicon-remove-circle' aria-hidden="true" onclick="deleteOption({{ data.id }})"></span>
 								</div>
 							</div>
 						{% endfor %}
-						<div class="form-group">
+						<div class="form-group" id="alter-option">
 							<div class="col-sm-offset-2 col-sm-3">
-								<button type="submit" class="btn btn-success btn-width">Update Customization</button>
+								<button type="submit" class="btn btn-success btn-width">Save Edits</button>
 							</div>
 							<div class="col-sm-2">
-								<button type="button" class="btn btn-success btn-width">
+								<button type="button" class="btn btn-success btn-width" onclick="addOption();">
 									<span class='glyphicon glyphicon-plus' aria-hidden="true"></span>
 									Add Option
 								</button>
@@ -75,5 +74,11 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	function deleteOption(delete_id) {
+	$("#form-row-" + delete_id).hide();
+	$.post("/option/delete/", {id: delete_id});
+}
+</script>
 </body>
 </html>
